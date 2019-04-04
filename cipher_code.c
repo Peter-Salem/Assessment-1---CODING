@@ -1,11 +1,19 @@
 #include<stdio.h> 
 
 
+//This is where the function prototypes of the task are going to go. 
+
+
+
+
+
+
 int main () {
     
-    //ya
     int c; //The address at which the user input from the menu will be stored so that we can use it in the switch case function. 
     
+    //These printf functions create the menu so the program has a user friendly interface. 
+    //The numbers used represent the different options the user can input to get to different options. 
     printf("Please select from the following numbers the option you want to choose\n");
     printf("1 - Encryption with a Rotation Cipher\n2 - Decryption with a Rotation Cipher\n3 - Encryption with a Substitution Cipher\n");
     printf("4 - Decryption with a Substitiution Cipher\n5 - Decryption of Encrypted Substitutional Cipher given only Cipher Text and Substitutions\n");
