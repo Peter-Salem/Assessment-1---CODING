@@ -12,7 +12,7 @@ int main () {
     printf("6 - Decryption of a message encrypted with a substituition cipher given cipher text only\n");
     
     
-    scanf("%d", &c);
+    scanf("%d", &c);//uses the file "input" to take user inputs. 
     
     
     switch (c) {
