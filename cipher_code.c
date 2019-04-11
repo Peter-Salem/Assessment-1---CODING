@@ -1,13 +1,8 @@
-#include<stdio.h> 
-
-
-//This is where the function prototypes of the task are going to go. 
-
-
+ #include<stdio.h> 
 
 int main () {
     
-    int c; //The address at which the user input from the menu will be stored so that we can use it in the switch case function. 
+    
     
     //These printf functions create the menu so the program has a user friendly interface. 
     //The numbers used represent the different options the user can input to get to different options. 
@@ -15,7 +10,12 @@ int main () {
     printf("Please select from the following numbers the option you want to choose\n");
     printf("1 - Encryption with a Rotation Cipher\n2 - Decryption with a Rotation Cipher\n3 - Encryption with a Substitution Cipher\n");
     printf("4 - Decryption with a Substitiution Cipher\n5 - Decryption of Encrypted Substitutional Cipher given only Cipher Text and Substitutions\n");
-    printf("6 - Decryption of a message encrypted with a substituition cipher given cipher text only\n");
+    printf("6 - Decryption of a message encrypted with a substituition cipher given cipher text only\n\n");
+    
+    int c; //User input for Menu
+    char array[50];//User message that is stored in a string
+    char character; //used to simplify the code blocks. 
+    int key, index; //Key - how much each letter is rotated and index scrolls through each element in string. 
     
     
     scanf("%d", &c);//uses the file "input" to take user inputs. 
@@ -23,11 +23,71 @@ int main () {
     
     switch (c) {
         case 1: 
-        printf("1"); 
-        break; 
+        printf("Please Type in your Key and then Message you want Encrypted. (DO NOT GO TO A NEW LINE)\n");
+        printf("The Encrypted Message is: ");
+        scanf("%d", &key);
+        scanf("%[^\n]s", array); //This will store the user input inside the elements of the array in the form of a string and include whitespace. 
+ 
+    
+    
+    for(index=0; array[index] != '\0'; index++) 
+    { 
+        
+        character = array[index]; //For every element in the stored string, we assign it to character. 
+        
+       if (!(character >= 65 && character <=90)) 
+        {
+            
+           printf("%c", character);//We do not need to encrypt hence we print it immediately. 
+           
+        }
+        
+        if (character >=65 && character <=90) 
+        {
+            
+        character = character - 65; //Turns the letters from their ASCII values into A=0 ... Z=26 so we can put the key in. 
+        character = (character + key)%26; //Rotates the alphabet so the word can be encrypted. 
+        character = character + 65; //converts back into ASCII characters so it can be printed to screen. 
+        printf("%c", character);//Prints the letter version of the ASCII numbers.
+        
+        }
+    }
+        break; //Need a break statment to stop it from continuing to next cases. 
+        
+        
         case 2:
-        printf("2"); 
+        
+        printf("Please type in your Key and then Message you want Decrypted (do not go to a new line)\n");
+        printf("The Decrypted message is: ");
+        scanf("%d", &key); 
+        scanf("%[^\n]s", array); //This will store the user input inside the elements of the array in the form of a string and include whitespace. 
+    
+    
+    for(index=0; array[index] != '\0'; index++) 
+    { 
+        
+        character = array[index]; //For every element in the stored string, we assign it to character. 
+        
+       if (!(character >= 65 && character <=90)) 
+        {
+            
+           printf("%c", character);//We do not need to encrypt hence we print it immediately. 
+           
+        }
+        
+        if (character >=65 && character <=90) 
+        {
+            
+        character = character - 65; //Turns the letters from their ASCII values into A=0 ... Z=26 so we can put the key in. 
+        character = (character - key)%26; //Rotates the alphabet so the word can be encrypted. 
+        character = character + 65; //converts back into ASCII characters so it can be printed to screen. 
+        printf("%c", character);//Prints the letter version of the ASCII numbers.
+        
+        }
+    }
+        
         break;
+        
         case 3:
         printf("3"); 
         break; 
