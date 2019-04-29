@@ -7,7 +7,8 @@ Encryption and Decryption of a Substitution Cipher with a key. */
 void RCE(void);//Rotation Cipher Encryption function.
 void RCD(void);//Rotation Cipher Decryption function.
 void SCE(void);//Substitution Cipher Encryption function.
-void SCD(void);//Substitution Cipher Decryption function.  
+void SCD(void);//Substitution Cipher Decryption function.
+void RDCK(void);//Rotation Cipher Encryption without key function  
 
 
 int main () {
@@ -18,7 +19,7 @@ int main () {
     
     printf("Please select from the following numbers the option you want to choose\n");
     printf("1 - Encryption with a Rotation Cipher\n2 - Decryption with a Rotation Cipher\n3 - Encryption with a Substitution Cipher\n");
-    printf("4 - Decryption with a Substitiution Cipher\n5 - Decryption of Encrypted Substitutional Cipher given only Cipher Text and Substitutions\n\n");
+    printf("4 - Decryption with a Substitution Cipher\n5 - Decryption of Encrypted Substitutional Cipher given only Cipher Text and Substitutions\n\n");
     
     int c; //User input for Menu
     
@@ -54,52 +55,8 @@ int main () {
         break; 
         
         case 5: 
-        /*
-        printf("Please type in the Message you want Decrypted (do not go to a new line)\n");
         
-        scanf("%[^\n]s", RCA); //This will store the user input inside the elements of the array in the form of a string and include whitespace. 
-        
-        for (key ==0; key <=26; key++) {
-            
-            for(index=0; RCA[index] != '\0'; index++) { 
-        
-                 character = RCA[index]; //For every element in the stored string, we assign it to character. 
-        
-                 if (character >= 97 && character <=122)
-    
-    
-                      character = character - 32; 
-                
-        
-                 if (!(character >= 65 && character <=90)) 
-      
-            
-                      printf("%c", character);//We do not need to encrypt hence we print it immediately. 
-          
-        
-                 if (character >=65 && character <=90) {
-            
-                      character = character - 65; //Turns the letters from their ASCII values into A=0 ... Z=26 so we can put the key in. 
-                      character = (character - key)%26; //Rotates the alphabet so the word can be encrypted.
-                      
-                      if (character <0) 
-                     
-                           character = character + 26; 
-        
-                      
-                      character = character + 65; //converts back into ASCII characters so it can be printed to screen.
-        
-        
-        
-        printf("%c", character);//Prints the letter version of the ASCII numbers.
-        
-        }
-        
-    }
-    
-    //printf(" Key %d \n", key); 
-    }
-    */
+        RDCK(); //Rotation Cipher Decryption without Key function.
         
         break; 
         default:
@@ -114,7 +71,7 @@ int main () {
 void RCE(void) {
     
     
-    char RCA[50];//User message that is stored in a string, stands for Rotation Cipher Array
+    char RCA[1024];//User message that is stored in a string, stands for Rotation Cipher Array
     char character; //used to simplify the code blocks.  
     int key, index; //Key - how much each letter is rotated, index scrolls through each element in string.
     
@@ -152,7 +109,7 @@ void RCE(void) {
 
 void RCD(void) {
     
-    char RCA[50];//User message that is stored in a string, stands for Rotation Cipher Array
+    char RCA[1024];//User message that is stored in a string, stands for Rotation Cipher Array
     char character; //used to simplify the code blocks.  
     int key, index; //Key - how much each letter is rotated, index scrolls through each element in string.
     
@@ -198,8 +155,8 @@ void RCD(void) {
 
 void SCE(void) {
     
-    char sub1[50]; /* These declarations are for Encryption SUBSTITUTION CIPHER*/
-    char msg1[50]; 
+    char sub1[1024]; /* These declarations are for Encryption SUBSTITUTION CIPHER*/
+    char msg1[1024]; 
     int index;
     
     printf("Please type the Substitution key and then message you want Encrypted.\n\n"); 
@@ -234,8 +191,8 @@ void SCE(void) {
 void SCD(void) {
     
     char abc[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    char sub[50];  
-    char msg[50]; 
+    char sub[1024];  
+    char msg[1024]; 
     
     printf("Type in the Substitution Key then Message you want to Decrypt:\n");
     scanf("%s", sub); 
@@ -269,7 +226,57 @@ void SCD(void) {
 
 
 
-
+void RDCK(void) {
+    
+    char RCA[1024];//User message that is stored in a string, stands for Rotation Cipher Array
+    char character; //used to simplify the code blocks.  
+    int key, index; //Key - how much each letter is rotated, index scrolls through each element in string.
+    
+    printf("Please type in the Message you want Decrypted (do not go to a new line)\n");
+        
+        scanf("%[^\n]s", RCA); //This will store the user input inside the elements of the array in the form of a string and include whitespace. 
+        
+        for (key =1; key <=25; key++) { //This will perform brute force attack by rotating through all of the keys.
+            
+            for(index=0; RCA[index] != '\0'; index++) { //RCA - Rotation Cipher Array 
+        
+                 character = RCA[index]; //For every element in the stored string, we assign it to character. 
+        
+                 if (character >= 97 && character <=122)
+    
+    
+                      character = character - 32; 
+                
+        
+                 if (!(character >= 65 && character <=90)) 
+      
+            
+                      printf("%c", character);//We do not need to encrypt hence we print it immediately. 
+          
+        
+                 if (character >=65 && character <=90) {
+            
+                      character = character - 65; //Turns the letters from their ASCII values into A=0 ... Z=26 so we can put the key in. 
+                      character = (character - key)%26; //Rotates the alphabet so the word can be encrypted.
+                      
+                      if (character <0) 
+                     
+                           character = character + 26; 
+        
+                      
+                      character = character + 65; //converts back into ASCII characters so it can be printed to screen.
+        
+        
+        printf("%c", character);//Prints the letter version of the ASCII numbers.
+        
+        }
+        
+    }
+    
+    printf(" Key %d \n", key); 
+    }
+    
+}
 
 
 
